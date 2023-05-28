@@ -1,7 +1,15 @@
 "use client";
 
 import React from "react";
-import { Stack, HStack, VStack, Box, Heading, Button } from "@chakra-ui/react";
+import {
+  Stack,
+  HStack,
+  VStack,
+  Box,
+  Heading,
+  Button,
+  Input,
+} from "@chakra-ui/react";
 
 // sx={{ outline: "1px solid red" }
 export default function Page() {
