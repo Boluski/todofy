@@ -1,7 +1,7 @@
 "use client";
 import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider } from "@chakra-ui/react";
-import { extendTheme, withDefaultColorScheme } from "@chakra-ui/react";
+import { extendTheme } from "@chakra-ui/react";
 
 const colors: object = {
   brand: {
@@ -15,6 +15,18 @@ const colors: object = {
     700: "#4CB52C",
     800: "#45A428",
     900: "#3E9424",
+  },
+  wBrand: {
+    50: "#FFFFFF",
+    100: "#F5F5F5",
+    200: "#EBEBEB",
+    300: "#E0E0E0",
+    400: "#D6D6D6",
+    500: "#CCCCCC",
+    600: "#C2C2C2",
+    700: "#B8B8B8",
+    800: "#ADADAD",
+    900: "#A3A3A3",
   },
 };
 

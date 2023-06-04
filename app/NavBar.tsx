@@ -13,7 +13,6 @@ export default function NavBar() {
         align={"center"}
         px={4}
         py={2}
-        sx={{ outline: "1px solid red" }}
         bgColor={"#F8F8F8"}
       >
         <Box>
