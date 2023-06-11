@@ -2,9 +2,14 @@
 
 import React from "react";
 import { Stack, Box, Heading, Button } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 
 // sx={{ outline: "1px solid red" }
 export default function NavBar() {
+  const router = useRouter();
+  function signup() {
+    router.push("/signup");
+  }
   return (
     <>
       <Stack
@@ -21,7 +26,9 @@ export default function NavBar() {
           </Heading>
         </Box>
         <Stack direction={"row"} spacing={4}>
-          <Button colorScheme="brand">Sign Up</Button>
+          <Button colorScheme="brand" onClick={() => signup()}>
+            Sign Up
+          </Button>
           <Button variant={"outline"} colorScheme="brand">
             Login
           </Button>
