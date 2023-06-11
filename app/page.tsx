@@ -8,7 +8,7 @@ import NavBar from "./NavBar";
 export default function Page() {
   return (
     <>
-      <Box minH={"100vh"} bgColor={"#A7DDA9"}>
+      <Box minH={"100vh"} bgColor={"#2F7831"}>
         <NavBar />
         <Stack py={40} spacing={4} align={"center"} h={"2xl"}>
           <Stack align={"center"} spacing={2} color={"#fff"} width={"5xl"}>
