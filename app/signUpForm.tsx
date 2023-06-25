@@ -185,114 +185,121 @@ export default function SignUpForm() {
 
   return (
     <>
-      <FormControl
-        isRequired
-        width={"lg"}
-        bgColor={"#fff"}
-        rounded={"2xl"}
-        shadow={"2xl"}
+      <Stack
+        width={"50%"}
+        bgColor={"#F5F5F5"}
+        justify={"center"}
+        align={"center"}
       >
-        <Stack spacing={4} p={4}>
-          <FormControl isInvalid={emailError} isRequired>
-            <FormLabel>Email Address:</FormLabel>
-            <Input
-              type="email"
-              variant={"filled"}
-              focusBorderColor="brand.600"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-            <FormErrorMessage>{emailErrorMessage}</FormErrorMessage>
-          </FormControl>
+        <FormControl
+          isRequired
+          width={"lg"}
+          bgColor={"#fff"}
+          rounded={"2xl"}
+          shadow={"2xl"}
+        >
+          <Stack spacing={4} p={4}>
+            <FormControl isInvalid={emailError} isRequired>
+              <FormLabel>Email Address:</FormLabel>
+              <Input
+                type="email"
+                variant={"filled"}
+                focusBorderColor="brand.600"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+              <FormErrorMessage>{emailErrorMessage}</FormErrorMessage>
+            </FormControl>
 
-          <FormControl isInvalid={passwordError} isRequired>
-            <FormLabel>Password:</FormLabel>
-            <Input
-              type="password"
-              variant={"filled"}
-              focusBorderColor="brand.600"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-            <FormErrorMessage>{passwordErrorMessage}</FormErrorMessage>
-          </FormControl>
+            <FormControl isInvalid={passwordError} isRequired>
+              <FormLabel>Password:</FormLabel>
+              <Input
+                type="password"
+                variant={"filled"}
+                focusBorderColor="brand.600"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+              <FormErrorMessage>{passwordErrorMessage}</FormErrorMessage>
+            </FormControl>
 
-          <FormControl isInvalid={confirmPasswordError} isRequired>
-            <FormLabel>Confirm password:</FormLabel>
-            <Input
-              type="password"
-              variant={"filled"}
-              focusBorderColor="brand.600"
-              value={confirmPassword}
-              onChange={(e) => {
-                setConfirmPassword(e.target.value);
-              }}
-            />
-            <FormErrorMessage>{confirmPasswordErrorMessage}</FormErrorMessage>
-          </FormControl>
+            <FormControl isInvalid={confirmPasswordError} isRequired>
+              <FormLabel>Confirm password:</FormLabel>
+              <Input
+                type="password"
+                variant={"filled"}
+                focusBorderColor="brand.600"
+                value={confirmPassword}
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value);
+                }}
+              />
+              <FormErrorMessage>{confirmPasswordErrorMessage}</FormErrorMessage>
+            </FormControl>
 
-          <FormControl isInvalid={usernameError} isRequired>
-            <FormLabel>Username</FormLabel>
-            <Input
-              type="text"
-              variant={"filled"}
-              focusBorderColor="brand.600"
-              value={username}
-              onChange={(e) => {
-                setUsername(e.target.value);
-              }}
-            />
-            <FormErrorMessage>{usernameErrorMessage}</FormErrorMessage>
-          </FormControl>
+            <FormControl isInvalid={usernameError} isRequired>
+              <FormLabel>Username</FormLabel>
+              <Input
+                type="text"
+                variant={"filled"}
+                focusBorderColor="brand.600"
+                value={username}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                }}
+              />
+              <FormErrorMessage>{usernameErrorMessage}</FormErrorMessage>
+            </FormControl>
 
-          <FormControl isInvalid={firstNameError} isRequired>
-            <FormLabel>First Name:</FormLabel>
-            <Input
-              type="text"
-              variant={"filled"}
-              focusBorderColor="brand.600"
-              value={firstName}
-              onChange={(e) => {
-                setFirstName(e.target.value);
-              }}
-            />
-            <FormErrorMessage>{firstNameErrorMessage}</FormErrorMessage>
-          </FormControl>
+            <FormControl isInvalid={firstNameError} isRequired>
+              <FormLabel>First Name:</FormLabel>
+              <Input
+                type="text"
+                variant={"filled"}
+                focusBorderColor="brand.600"
+                value={firstName}
+                onChange={(e) => {
+                  setFirstName(e.target.value);
+                }}
+              />
+              <FormErrorMessage>{firstNameErrorMessage}</FormErrorMessage>
+            </FormControl>
 
-          <FormControl isInvalid={lastNameError} isRequired>
-            <FormLabel>Last Name:</FormLabel>
-            <Input
-              type="text"
-              variant={"filled"}
-              focusBorderColor="brand.600"
-              value={lastName}
-              onChange={(e) => {
-                setLastName(e.target.value);
-              }}
-            />
-            <FormErrorMessage>{lastNameErrorMessage}</FormErrorMessage>
-          </FormControl>
-          <Button
-            colorScheme="brand"
-            onClick={() =>
-              newUser(
-                email,
-                password,
-                confirmPassword,
-                username,
-                firstName,
-                lastName
-              )
-            }
-          >
-            Sign Up
-          </Button>
-        </Stack>
-      </FormControl>
+            <FormControl isInvalid={lastNameError} isRequired>
+              <FormLabel>Last Name:</FormLabel>
+              <Input
+                type="text"
+                variant={"filled"}
+                focusBorderColor="brand.600"
+                value={lastName}
+                onChange={(e) => {
+                  setLastName(e.target.value);
+                }}
+              />
+              <FormErrorMessage>{lastNameErrorMessage}</FormErrorMessage>
+            </FormControl>
+            <Button
+              colorScheme="brand"
+              onClick={() =>
+                newUser(
+                  email,
+                  password,
+                  confirmPassword,
+                  username,
+                  firstName,
+                  lastName
+                )
+              }
+            >
+              Sign Up
+            </Button>
+          </Stack>
+        </FormControl>
+      </Stack>
     </>
   );
 }
