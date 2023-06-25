@@ -1,8 +1,9 @@
 "use client";
+
 import React from "react";
 import { useState } from "react";
 import { app } from "../app/config";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore, setDoc, doc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import {
@@ -39,10 +40,68 @@ export default function SignUpForm() {
   const [lastNameError, setLastNameError] = useState(false);
   const [lastNameErrorMessage, setLastNameErrorMessage] = useState("");
 
+  // Function that handles error Messages in the UI
   function errorMessage(field: string, message: string) {
     if (field == "confirmPassword") {
+      setEmailError(false);
+      setEmailErrorMessage(message);
+      setPasswordError(false);
+      setPasswordErrorMessage(message);
       setConfirmPasswordError(true);
       setConfirmPasswordErrorMessage(message);
+
+      setUsernameError(false);
+      setUsernameErrorMessage(message);
+
+      setFirstNameError(false);
+      setFirstNameErrorMessage(message);
+      setLastNameError(false);
+      setLastNameErrorMessage(message);
+    } else if (field == "missingPassword") {
+      setEmailError(false);
+      setEmailErrorMessage(message);
+      setPasswordError(true);
+      setPasswordErrorMessage(message);
+      setConfirmPasswordError(false);
+      setConfirmPasswordErrorMessage(message);
+
+      setUsernameError(false);
+      setUsernameErrorMessage(message);
+
+      setFirstNameError(false);
+      setFirstNameErrorMessage(message);
+      setLastNameError(false);
+      setLastNameErrorMessage(message);
+    } else if (field == "emailInUse") {
+      setEmailError(true);
+      setEmailErrorMessage(message);
+      setPasswordError(false);
+      setPasswordErrorMessage(message);
+      setConfirmPasswordError(false);
+      setConfirmPasswordErrorMessage(message);
+
+      setUsernameError(false);
+      setUsernameErrorMessage(message);
+
+      setFirstNameError(false);
+      setFirstNameErrorMessage(message);
+      setLastNameError(false);
+      setLastNameErrorMessage(message);
+    } else if (field == "weakPassword") {
+      setEmailError(false);
+      setEmailErrorMessage(message);
+      setPasswordError(true);
+      setPasswordErrorMessage(message);
+      setConfirmPasswordError(false);
+      setConfirmPasswordErrorMessage(message);
+
+      setUsernameError(false);
+      setUsernameErrorMessage(message);
+
+      setFirstNameError(false);
+      setFirstNameErrorMessage(message);
+      setLastNameError(false);
+      setLastNameErrorMessage(message);
     } else if (field == "all") {
       setEmailError(true);
       setEmailErrorMessage(message);
@@ -61,6 +120,7 @@ export default function SignUpForm() {
     }
   }
 
+  // Creates and login a new user
   async function newUser(
     email: string,
     password: string,
@@ -72,46 +132,54 @@ export default function SignUpForm() {
     const db = getFirestore(app);
     const auth = getAuth(app);
 
+    // Check if fields are empty
     if (
-      email == "" &&
-      password == "" &&
-      confirmPassword == "" &&
-      username == "" &&
-      firstName == "" &&
+      email == "" ||
+      password == "" ||
+      confirmPassword == "" ||
+      username == "" ||
+      firstName == "" ||
       lastName == ""
     ) {
       errorMessage("all", "");
-    }
-
-    if (password == confirmPassword) {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then(async (userCredential) => {
-          const user = userCredential.user;
-          console.log(user);
-
-          // try {
-          //   const docRef = await addDoc(collection(db, "users"), {
-          //     email: email,
-          //     password: password,
-          //     username: username,
-          //     firstName: firstName,
-          //     lastName: lastName,
-          //   });
-          //   console.log("Document written with ID: ", docRef.id);
-          // } catch (e) {
-          //   console.error("Error adding document: ", e);
-          // }
-
-          router.push("/dashboard");
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorMessage);
-          console.log(errorCode);
-        });
     } else {
-      errorMessage("confirmPassword", "Password don't match.");
+      if (password == confirmPassword) {
+        // Creates a user with Email and password.
+        createUserWithEmailAndPassword(auth, email, password)
+          .then(async (userCredential) => {
+            const user = userCredential.user;
+
+            const data = {
+              email: email,
+              username: username,
+              firstName: firstName,
+              lastName: lastName,
+            };
+
+            // Creates a user document
+            try {
+              await setDoc(doc(db, "users", user.uid), data);
+              console.log("created document for:", user.uid);
+            } catch (e) {
+              console.error("Error adding document: ", e);
+            }
+
+            router.push("/dashboard");
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            console.log(errorCode);
+            if (errorCode == "auth/missing-password") {
+              errorMessage("missingPassword", "Enter password.");
+            } else if (errorCode == "auth/email-already-in-use") {
+              errorMessage("emailInUse", "This email is already in use.");
+            } else if (errorCode == "auth/weak-password") {
+              errorMessage("weakPassword", "This password is too weak.");
+            }
+          });
+      } else {
+        errorMessage("confirmPassword", "Password don't match.");
+      }
     }
   }
 
