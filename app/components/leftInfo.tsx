@@ -3,8 +3,11 @@
 import React from "react";
 import { Heading, Stack, Text, Button, Box } from "@chakra-ui/react";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 
 export default function LeftInfo(props: any) {
+  const router = useRouter();
+
   return (
     <>
       <Stack
@@ -25,7 +28,7 @@ export default function LeftInfo(props: any) {
               size={"lg"}
               rightIcon={<AiOutlineArrowRight />}
               colorScheme="brand"
-              // variant={"outline"}
+              onClick={() => router.push(props.link)}
             >
               {props.linkName}
             </Button>

@@ -16,10 +16,10 @@ export default function page() {
         spacing={0}
       >
         <LeftInfo
-          heading="Sign Up"
-          text="Get tasks done and level up your productivity with Todofy."
-          linkName=" Login"
-          link="/login"
+          heading="Login"
+          text="Todofy will skyrocket your productivity to a new level."
+          linkName="Sign Up"
+          link="/signup"
         />
         <SignUpForm />
       </Stack>

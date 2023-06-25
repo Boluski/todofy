@@ -8,8 +8,11 @@ import { useRouter } from "next/navigation";
 // sx={{ outline: "1px solid red" }}
 export default function Page() {
   const router = useRouter();
-  function signup() {
+  function signUp() {
     router.push("/signup");
+  }
+  function logIn() {
+    router.push("/login");
   }
   return (
     <>
@@ -26,11 +29,16 @@ export default function Page() {
             </Text>
           </Stack>
           <Stack direction={"row"} justify={"center"} spacing={4}>
-            <Button size={"lg"} colorScheme="brand" onClick={() => signup()}>
+            <Button size={"lg"} colorScheme="brand" onClick={() => signUp()}>
               Start now
             </Button>
-            <Button size={"lg"} variant={"outline"} colorScheme="brand">
-              Log in
+            <Button
+              size={"lg"}
+              variant={"outline"}
+              colorScheme="brand"
+              onClick={() => logIn()}
+            >
+              Login
             </Button>
           </Stack>
         </Stack>

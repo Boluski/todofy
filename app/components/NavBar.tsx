@@ -10,6 +10,9 @@ export default function NavBar() {
   function signup() {
     router.push("/signup");
   }
+  function login() {
+    router.push("/login");
+  }
   return (
     <>
       <Stack
@@ -29,7 +32,11 @@ export default function NavBar() {
           <Button colorScheme="brand" onClick={() => signup()}>
             Sign Up
           </Button>
-          <Button variant={"outline"} colorScheme="brand">
+          <Button
+            variant={"outline"}
+            colorScheme="brand"
+            onClick={() => login()}
+          >
             Login
           </Button>
         </Stack>
