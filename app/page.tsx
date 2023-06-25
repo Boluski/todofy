@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Stack, Heading, Text, Button, Box } from "@chakra-ui/react";
-import NavBar from "./NavBar";
+import NavBar from "./components/NavBar";
 import { useRouter } from "next/navigation";
 
 // sx={{ outline: "1px solid red" }}

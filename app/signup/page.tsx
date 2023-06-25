@@ -2,8 +2,8 @@
 
 import React from "react";
 import { Stack } from "@chakra-ui/react";
-import LeftInfo from "../leftInfo";
-import SignUpForm from "../signUpForm";
+import LeftInfo from "../components/leftInfo";
+import SignUpForm from "../components/signUpForm";
 
 // sx={{ outline: "1px solid red" }}
 export default function page() {

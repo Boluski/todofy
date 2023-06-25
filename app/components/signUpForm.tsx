@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useState } from "react";
-import { app } from "../app/config";
+import { app } from "../config";
 import { getFirestore, setDoc, doc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
