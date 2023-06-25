@@ -3,7 +3,7 @@
 import React from "react";
 import { Stack } from "@chakra-ui/react";
 import LeftInfo from "../components/leftInfo";
-import SignUpForm from "../components/signUpForm";
+import LoginForm from "../components/loginForm";
 
 // sx={{ outline: "1px solid red" }}
 export default function page() {
@@ -21,7 +21,7 @@ export default function page() {
           linkName="Sign Up"
           link="/signup"
         />
-        <SignUpForm />
+        <LoginForm />
       </Stack>
     </>
   );

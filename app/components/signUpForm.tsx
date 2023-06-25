@@ -16,6 +16,8 @@ import {
 } from "@chakra-ui/react";
 
 export default function SignUpForm() {
+  const [loading, setLoading] = useState(false);
+
   //Input field state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +25,6 @@ export default function SignUpForm() {
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const router = useRouter();
 
   // Error states
   const [emailError, setEmailError] = useState(false);
@@ -40,8 +41,14 @@ export default function SignUpForm() {
   const [lastNameError, setLastNameError] = useState(false);
   const [lastNameErrorMessage, setLastNameErrorMessage] = useState("");
 
+  const router = useRouter();
+  function toDashboard() {
+    router.push("/dashboard");
+  }
+
   // Function that handles error Messages in the UI
   function errorMessage(field: string, message: string) {
+    setLoading(false);
     if (field == "confirmPassword") {
       setEmailError(false);
       setEmailErrorMessage(message);
@@ -129,6 +136,7 @@ export default function SignUpForm() {
     firstName: string,
     lastName: string
   ) {
+    setLoading(true);
     const db = getFirestore(app);
     const auth = getAuth(app);
 
@@ -164,7 +172,7 @@ export default function SignUpForm() {
               console.error("Error adding document: ", e);
             }
 
-            router.push("/dashboard");
+            toDashboard();
           })
           .catch((error) => {
             const errorCode = error.code;
@@ -294,6 +302,7 @@ export default function SignUpForm() {
                   lastName
                 )
               }
+              isLoading={loading}
             >
               Sign Up
             </Button>
