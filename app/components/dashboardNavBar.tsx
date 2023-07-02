@@ -18,13 +18,7 @@ export default function DashboardNavBar(props: any) {
           </Heading>
           <Heading size={"xl"}>{props.display}</Heading>
         </Stack>
-        <IconButton
-          aria-label="Menu"
-          size={"lg"}
-          icon={<GiHamburgerMenu />}
-          // colorScheme="brand"
-          // variant={"outline"}
-        />
+        <IconButton aria-label="Menu" size={"lg"} icon={<GiHamburgerMenu />} />
       </Stack>
     </>
   );
