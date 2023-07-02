@@ -5,7 +5,11 @@ import { useState } from "react";
 import { app } from "../config";
 import { getFirestore, setDoc, doc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import {
   Stack,
   Button,
@@ -156,6 +160,15 @@ export default function SignUpForm() {
         createUserWithEmailAndPassword(auth, email, password)
           .then(async (userCredential) => {
             const user = userCredential.user;
+
+            // update user profile display name
+            updateProfile(user, { displayName: `${firstName} ${lastName}` })
+              .then(() => {
+                // success
+              })
+              .catch((error) => {
+                console.log(error);
+              });
 
             const data = {
               email: email,
