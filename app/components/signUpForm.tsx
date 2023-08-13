@@ -175,6 +175,7 @@ export default function SignUpForm() {
               username: username,
               firstName: firstName,
               lastName: lastName,
+              projects: [],
             };
 
             // Creates a user document
