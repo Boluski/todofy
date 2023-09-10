@@ -27,6 +27,8 @@ import {
   query,
   where,
   getDocs,
+  doc,
+  setDoc,
 } from "firebase/firestore";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
 
@@ -37,8 +39,10 @@ export default function NewProjectButton() {
   const [projectName, setProjectName] = useState("");
 
   function newProject() {
+    let userDocId: string,
+      username: string,
+      projectId: string = "";
     const auth = getAuth();
-    const project: object = { name: projectName, users: [] };
     const db = getFirestore(app);
 
     onAuthStateChanged(auth, async (user) => {
@@ -49,14 +53,18 @@ export default function NewProjectButton() {
         );
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
-          console.log(doc.id, "=>", doc.data().username);
+          userDocId = doc.id;
+          username = doc.data().username;
         });
+        const project: object = { name: projectName, users: [username] };
+        const docRef = addDoc(collection(db, "projects"), project);
+        projectId = (await docRef).id;
+        const projectDocRef = doc(db, "users", userDocId);
+        // setDoc(projectDocRef, { projects: : }, { merge: true });
+        onClose();
       } else {
       }
     });
-
-    // const docRef = addDoc(collection(db, "projects"), project);
-    // console.log(docRef);
   }
 
   return (
